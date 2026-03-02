@@ -1,18 +1,23 @@
 import React from "react";
 
 import Button from "../Button";
+import VariantSelector from "../VariantSelector";
+import Toast from "../Toast";
+import { VARIANT_OPTIONS } from "../VariantProvider";
 
 import styles from "./ToastPlayground.module.css";
-import VariantSelector from "../VariantSelector/VariantSelector";
-
-const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
 function ToastPlayground() {
   const messageId = React.useId();
   const [message, setMessage] = React.useState("");
 
+  const [toastVisible, setToastVisible] = React.useState(false);
+
   return (
     <div className={styles.wrapper}>
+      {toastVisible && (
+        <Toast message={message} disableToast={() => setToastVisible(false)} />
+      )}
       <header>
         <img alt="Cute toast mascot" src="/toast.png" />
         <h1>Toast Playground</h1>
@@ -42,7 +47,9 @@ function ToastPlayground() {
         <div className={styles.row}>
           <div className={styles.label} />
           <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
-            <Button>Pop Toast!</Button>
+            <Button onClick={(event) => setToastVisible(true)}>
+              Pop Toast!
+            </Button>
           </div>
         </div>
       </div>
