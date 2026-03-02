@@ -1,5 +1,7 @@
 import React from "react";
 
+import useKeydownListener from "../../hooks/useKeydownListener";
+
 export const ToastContext = React.createContext();
 
 function ToastProvider({ children }) {
@@ -19,6 +21,8 @@ function ToastProvider({ children }) {
   function emptyToasts() {
     setToasts([]);
   }
+
+  useKeydownListener({ key: "Escape", handler: emptyToasts });
 
   const context = { addToast, removeToast, toasts, emptyToasts };
 
