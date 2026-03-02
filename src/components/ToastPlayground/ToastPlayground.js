@@ -16,13 +16,11 @@ function ToastPlayground() {
   const [message, setMessage] = React.useState("");
   const [variant, setVariant] = React.useState(VARIANT_OPTIONS[0]);
 
-  const { addToast, removeToast, toasts } = React.useContext(ToastContext);
-
-  console.log("toasts:" + toasts);
+  const { addToast, toasts } = React.useContext(ToastContext);
 
   return (
     <div className={styles.wrapper}>
-      <ToastShelf items={toasts} removeItem={removeToast}></ToastShelf>
+      <ToastShelf items={toasts}></ToastShelf>
 
       <header>
         <img alt="Cute toast mascot" src="/toast.png" />
@@ -33,11 +31,7 @@ function ToastPlayground() {
         onSubmit={(event) => {
           event.preventDefault();
 
-          addToast({
-            id: crypto.randomUUID(),
-            variant,
-            message,
-          });
+          addToast({ message, variant });
 
           setMessage("");
           setVariant(VARIANT_OPTIONS[0]);

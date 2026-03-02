@@ -5,14 +5,13 @@ export const ToastContext = React.createContext();
 function ToastProvider({ children }) {
   const [toasts, setToasts] = React.useState([]);
 
-  function addToast(toast) {
-    const newItems = [...toasts, toast];
+  function addToast({ message, variant }) {
+    const newItems = [...toasts, { id: crypto.randomUUID(), variant, message }];
     setToasts(newItems);
   }
 
-  function removeToast(toast) {
-    const toastIndex = toasts.indexOf(toast);
-    const newToasts = toasts.toSpliced(toastIndex, 1);
+  function removeToast(toastId) {
+    const newToasts = toasts.filter((toast) => toast.id !== toastId);
 
     setToasts(newToasts);
   }
