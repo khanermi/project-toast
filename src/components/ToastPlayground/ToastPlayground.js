@@ -3,17 +3,15 @@ import React from "react";
 import Button from "../Button";
 import VariantSelector from "../VariantSelector";
 import ToastShelf from "../ToastShelf";
-import { VariantContext, VARIANT_OPTIONS } from "../VariantProvider";
 
 import styles from "./ToastPlayground.module.css";
+
+const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
 function ToastPlayground() {
   const messageId = React.useId();
   const [message, setMessage] = React.useState("");
-
-  const { variant: currentVariant, setVariant } =
-    React.useContext(VariantContext);
-
+  const [variant, setVariant] = React.useState(VARIANT_OPTIONS[0]);
   const [items, setItems] = React.useState([]);
 
   function removeItem(item) {
@@ -43,7 +41,7 @@ function ToastPlayground() {
 
           addItem({
             id: crypto.randomUUID(),
-            variant: currentVariant,
+            variant,
             message,
           });
 
@@ -70,7 +68,11 @@ function ToastPlayground() {
             </div>
           </div>
 
-          <VariantSelector variants={VARIANT_OPTIONS}></VariantSelector>
+          <VariantSelector
+            variants={VARIANT_OPTIONS}
+            setVariant={setVariant}
+            currentVariant={variant}
+          ></VariantSelector>
 
           <div className={styles.row}>
             <div className={styles.label} />

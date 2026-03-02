@@ -1,11 +1,7 @@
 import React from "react";
 
-import { VariantContext } from "../VariantProvider";
-
-function VariantItem({ name }) {
+function VariantItem({ name, variant, setVariant }) {
   const id = React.useId();
-
-  const { variant, setVariant } = React.useContext(VariantContext);
 
   return (
     <label htmlFor={id}>
