@@ -1,34 +1,28 @@
 import React from "react";
 
+import styles from "./ToastPlayground.module.css";
+
 import Button from "../Button";
 import VariantSelector from "../VariantSelector";
 import ToastShelf from "../ToastShelf";
 
-import styles from "./ToastPlayground.module.css";
+import { ToastContext } from "../ToastProvider";
 
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
 function ToastPlayground() {
   const messageId = React.useId();
+
   const [message, setMessage] = React.useState("");
   const [variant, setVariant] = React.useState(VARIANT_OPTIONS[0]);
-  const [items, setItems] = React.useState([]);
 
-  function removeItem(item) {
-    const itemIndex = items.indexOf(item);
-    const newItems = items.toSpliced(itemIndex, 1);
+  const { addToast, removeToast, toasts } = React.useContext(ToastContext);
 
-    setItems(newItems);
-  }
-
-  function addItem(item) {
-    const newItems = [...items, item];
-    setItems(newItems);
-  }
+  console.log("toasts:" + toasts);
 
   return (
     <div className={styles.wrapper}>
-      <ToastShelf items={items} removeItem={removeItem}></ToastShelf>
+      <ToastShelf items={toasts} removeItem={removeToast}></ToastShelf>
 
       <header>
         <img alt="Cute toast mascot" src="/toast.png" />
@@ -39,7 +33,7 @@ function ToastPlayground() {
         onSubmit={(event) => {
           event.preventDefault();
 
-          addItem({
+          addToast({
             id: crypto.randomUUID(),
             variant,
             message,
