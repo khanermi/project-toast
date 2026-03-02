@@ -3,12 +3,12 @@ import React from "react";
 import Button from "../Button";
 
 import styles from "./ToastPlayground.module.css";
+import VariantSelector from "../VariantSelector/VariantSelector";
 
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
 function ToastPlayground() {
   const messageId = React.useId();
-
   const [message, setMessage] = React.useState("");
 
   return (
@@ -37,22 +37,7 @@ function ToastPlayground() {
           </div>
         </div>
 
-        <div className={styles.row}>
-          <div className={styles.label}>Variant</div>
-          <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
-            <label htmlFor="variant-notice">
-              <input
-                id="variant-notice"
-                type="radio"
-                name="variant"
-                value="notice"
-              />
-              notice
-            </label>
-
-            {/* TODO Other Variant radio buttons here */}
-          </div>
-        </div>
+        <VariantSelector variants={VARIANT_OPTIONS}></VariantSelector>
 
         <div className={styles.row}>
           <div className={styles.label} />

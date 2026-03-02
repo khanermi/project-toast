@@ -1,12 +1,15 @@
-import React from 'react';
+import React from "react";
 
-import ToastPlayground from '../ToastPlayground';
-import Footer from '../Footer';
+import ToastPlayground from "../ToastPlayground";
+import Footer from "../Footer";
+import VariantProvider from "../VariantProvider";
 
 function App() {
   return (
     <>
-      <ToastPlayground />
+      <VariantProvider>
+        <ToastPlayground />
+      </VariantProvider>
       <Footer />
     </>
   );
