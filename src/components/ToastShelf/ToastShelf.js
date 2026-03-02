@@ -5,7 +5,12 @@ import styles from "./ToastShelf.module.css";
 
 function ToastShelf({ items }) {
   return (
-    <ol className={styles.wrapper}>
+    <ol
+      className={styles.wrapper}
+      role="region"
+      aria-live="polite"
+      aria-label="Notification"
+    >
       {items.map((item) => (
         <li key={item.id} className={styles.toastWrapper}>
           <Toast id={item.id} variant={item.variant}>
